@@ -161,6 +161,11 @@ public class Main extends javax.swing.JFrame {
 
         mniCuadrado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         mniCuadrado.setText("Cuadrado");
+        mniCuadrado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCuadradoActionPerformed(evt);
+            }
+        });
         mnbMain.add(mniCuadrado);
 
         mniTriangulo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
@@ -222,11 +227,29 @@ public class Main extends javax.swing.JFrame {
 
     private void btnDibujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDibujarActionPerformed
         Circulo circulo;
-        circulo = new Circulo(Integer.parseInt(txtRadio.getText()));
+        Cuadrado cuadrado;
+        if(figure==0){
+            circulo = new Circulo(Integer.parseInt(txtRadio.getText()));
         txtPerimetro.setText(Float.toString(circulo.Perimetro()));
         txtArea.setText(Float.toString(circulo.Area()));
         circulo.drawFigure(pnlCanvas.getGraphics());
+        }else if(figure==1){
+            cuadrado = new Cuadrado(Integer.parseInt(txtRadio.getText()));
+        txtPerimetro.setText(Float.toString(cuadrado.Perimetro()));
+        txtArea.setText(Float.toString(cuadrado.Area()));
+        cuadrado.drawFigure(pnlCanvas.getGraphics());
+        }
+        
     }//GEN-LAST:event_btnDibujarActionPerformed
+
+    private void mniCuadradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCuadradoActionPerformed
+        if(evt.getSource().equals(mniCuadrado)){
+            figure = 1;
+            lblAltura.setVisible(false);
+            txtAltura.setVisible(false);
+            lblRadio.setText("Lado");
+        }
+    }//GEN-LAST:event_mniCuadradoActionPerformed
 
     /**
      * @param args the command line arguments
