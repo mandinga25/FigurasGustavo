@@ -145,7 +145,7 @@ public class Main extends javax.swing.JFrame {
         );
         pnlCanvasLayout.setVerticalGroup(
             pnlCanvasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 278, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         mnbMain.setText("Figuras");
@@ -165,6 +165,11 @@ public class Main extends javax.swing.JFrame {
 
         mniTriangulo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         mniTriangulo.setText("Triangulo");
+        mniTriangulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTrianguloActionPerformed(evt);
+            }
+        });
         mnbMain.add(mniTriangulo);
 
         jMenuBar1.add(mnbMain);
@@ -195,11 +200,12 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlCanvas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnlCanvas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(pnlParametros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnDibujar)
                             .addComponent(btnBorrar))
@@ -222,11 +228,28 @@ public class Main extends javax.swing.JFrame {
 
     private void btnDibujarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDibujarActionPerformed
         Circulo circulo;
-        circulo = new Circulo(Integer.parseInt(txtRadio.getText()));
-        txtPerimetro.setText(Float.toString(circulo.Perimetro()));
-        txtArea.setText(Float.toString(circulo.Area()));
-        circulo.drawFigure(pnlCanvas.getGraphics());
+        Triangulo triangulo;
+        if(figure==0){
+            circulo = new Circulo(Integer.parseInt(txtRadio.getText()));
+            txtPerimetro.setText(Float.toString(circulo.Perimetro()));
+            txtArea.setText(Float.toString(circulo.Area()));
+            circulo.drawFigure(pnlCanvas.getGraphics());
+        } else if(figure == 1){
+            triangulo = new Triangulo(Integer.parseInt(txtRadio.getText()), Integer.parseInt(txtAltura.getText()));
+            txtPerimetro.setText(Float.toString(triangulo.Perimetro()));
+            txtArea.setText(Float.toString(triangulo.Area()));
+            triangulo.drawFigure(pnlCanvas.getGraphics());
+        }    
     }//GEN-LAST:event_btnDibujarActionPerformed
+
+    private void mniTrianguloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTrianguloActionPerformed
+        if(evt.getSource().equals(mniTriangulo)){
+            figure=1;
+            lblAltura.setVisible(true);
+            txtAltura.setVisible(true);
+            lblRadio.setText("Base");
+        }
+    }//GEN-LAST:event_mniTrianguloActionPerformed
 
     /**
      * @param args the command line arguments
